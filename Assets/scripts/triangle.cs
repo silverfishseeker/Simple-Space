@@ -36,7 +36,8 @@ public class triangle : MonoBehaviour
         float posicionXLimitada  = Mathf.Clamp(posicionRaton.x, leftLimit, rightLimit);
         transform.position = new Vector3(posicionXLimitada , transform.position.y, transform.position.z);
 
-        if (Time.time >= nextShootTime){
+        while (Engine.engine.isOn && nextShootTime < Time.time){
+            nextShootTime += cadencia;
             GameObject nuevoPrefab = Instantiate(bala, transform.position, Quaternion.identity);
             nextShootTime = Time.time + cadencia;
         }
@@ -48,6 +49,9 @@ public class triangle : MonoBehaviour
         if (danger != null && !isInvulnerable){
             StartCoroutine(InvulnerableCooldown());
             salud -= danger.danger();
+            if (salud <= 0){
+                Engine.engine.GameOver();
+            }
             ActualizarDisplayer();
         }
     }

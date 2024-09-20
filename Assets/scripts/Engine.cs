@@ -1,10 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Engine : MonoBehaviour
 {
     public static Engine engine;
+
+    public enum GameState { Menu, InGame, GameOver };
+    public GameState currentState;
+
+    public bool isOn => currentState == GameState.InGame;
+
+    public GameObject menuUI;
+    public GameObject gameOverUI;
 
     public GameObject prefabCuadrado;
     public float cadencia;
@@ -12,31 +21,7 @@ public class Engine : MonoBehaviour
     public float xIniMin;
     public float xIniMax;
 
-    public int spawnTimeTableSize;
-
-    private float[] spawnTimeTableLeft;
-    private float[] spawnTimeTableRight;
-    private bool isLeftSpawnTimeTable = true;
-    private int spawnTimeIndex = 0;
-
-    private float GetSpawnTimeTable() {
-        if (spawnTimeIndex >= spawnTimeTableSize){
-            float[] currTable = isLeftSpawnTimeTable ? spawnTimeTableLeft : spawnTimeTableRight;
-
-            currTable[0] = (
-                    !isLeftSpawnTimeTable ? spawnTimeTableLeft : spawnTimeTableRight
-                )[spawnTimeTableSize-1] + cadencia;
-
-            for (int i = 1; i < spawnTimeTableSize; i++){
-                currTable[i] = currTable[i-1] + cadencia;
-            }
-
-            isLeftSpawnTimeTable = !isLeftSpawnTimeTable;
-            spawnTimeIndex = 0;
-        }
-        return isLeftSpawnTimeTable ? spawnTimeTableLeft[spawnTimeIndex] : spawnTimeTableRight[spawnTimeIndex];
-    }
-
+    private float nextTime;
 
     void OnEnable() {
         // singleton
@@ -45,30 +30,53 @@ public class Engine : MonoBehaviour
             return;
         }
         engine = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     void Start() {
-        spawnTimeTableLeft = new float[spawnTimeTableSize];
-        spawnTimeTableRight = new float[spawnTimeTableSize];
-
-        spawnTimeTableLeft[0] = cadencia;
-        for (int i = 1; i < spawnTimeTableSize; i++){
-            spawnTimeTableLeft[i] = spawnTimeTableLeft[i-1] + cadencia;
-        }
+        RestartGame();
     }
 
     void Update() {
-        while(GetSpawnTimeTable() < Time.time){
-            spawnTimeIndex++;
-            GenerarCuadrado();
+        switch (currentState) {
+            case GameState.Menu:
+                break;
+
+            case GameState.InGame:
+                while (nextTime < Time.time) {
+                    GenerarCuadrado();
+                    nextTime += cadencia;
+                }
+                break;
+
+            case GameState.GameOver:
+                break;
         }
+    }
+
+    public void StartGame() {
+        currentState = GameState.InGame;
+        menuUI.SetActive(false);
+        gameOverUI.SetActive(false);
+    }
+
+    // Método para mostrar la pantalla de Game Over
+    public void GameOver() {
+        currentState = GameState.GameOver;
+        menuUI.SetActive(false);
+        gameOverUI.SetActive(true);
+    }
+
+    // Método para reiniciar el juego desde el Game Over
+    public void RestartGame() {
+        currentState = GameState.Menu;
+        menuUI.SetActive(true);
+        gameOverUI.SetActive(false);
+        nextTime = 0;
     }
 
     void GenerarCuadrado() {
         float xPos = Random.Range(xIniMin, xIniMax);
         Vector3 spawnPos = new Vector3(xPos, yIni, 0);
-        Debug.Log(spawnPos);
         Instantiate(prefabCuadrado, spawnPos, Quaternion.identity);
     }
 }
