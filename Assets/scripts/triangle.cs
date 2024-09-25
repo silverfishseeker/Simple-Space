@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class triangle : MonoBehaviour
+public class Triangle : MonoBehaviour
 {
     public GameObject bala;
     public TextMeshProUGUI vidaDisplayer;
 
     public float leftLimit;
     public float rightLimit;
-    public float cadencia;
+    public float cadencia => 3 / (Engine.en.poder+1);
     public float salud;
     public float invulnerableTime;
     public Color invulnerableColor;
@@ -36,7 +36,7 @@ public class triangle : MonoBehaviour
         float posicionXLimitada  = Mathf.Clamp(posicionRaton.x, leftLimit, rightLimit);
         transform.position = new Vector3(posicionXLimitada , transform.position.y, transform.position.z);
 
-        while (Engine.engine.isOn && nextShootTime < Time.time){
+        while (Engine.en.isOn && nextShootTime < Time.time){
             nextShootTime += cadencia;
             GameObject nuevoPrefab = Instantiate(bala, transform.position, Quaternion.identity);
             nextShootTime = Time.time + cadencia;
@@ -50,7 +50,7 @@ public class triangle : MonoBehaviour
             StartCoroutine(InvulnerableCooldown());
             salud -= danger.danger();
             if (salud <= 0){
-                Engine.engine.GameOver();
+                Engine.en.GameOver();
             }
             ActualizarDisplayer();
         }
