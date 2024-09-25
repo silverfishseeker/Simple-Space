@@ -5,7 +5,7 @@ using UnityEngine;
 public class Deslizador : MonoBehaviour
 {
     public float velocidad;
-    public float limiteInferior;
+    public float limiteInferior = -5;
 
     // Update is called once per frame
     protected void Update()

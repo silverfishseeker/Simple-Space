@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Earth : MonoBehaviour
+public class Earth : HasHealth, IDangerous
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public float scoree;
+    public float dealDamage;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public float velocidadRotacion; 
+
+    public override float score => scoree;
+    public float danger => dealDamage;
+    
+    new void Update() {
+        base.Update();
+        transform.Rotate(0, 0, velocidadRotacion * Time.deltaTime);
     }
 }

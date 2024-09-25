@@ -25,6 +25,7 @@ public class Engine : MonoBehaviour
     public GameObject gameOverUI;
     public GameObject prefabCuadrado;
     public GameObject prefabPlaneta;
+    public GameObject prefabEarth;
     public GameObject prefabSeta;
     public float yIni;
     public float xIniMin;
@@ -48,8 +49,8 @@ public class Engine : MonoBehaviour
         RestartGame();
     }
 
-    public void Planet(){
-                        Instantiate(prefabPlaneta, spawnPos, Quaternion.identity);
+    public void Prueba(){
+                        Instantiate(prefabEarth, spawnPos, Quaternion.identity);
     }
 
     void Update() {
@@ -60,7 +61,9 @@ public class Engine : MonoBehaviour
             case GameState.InGame:
                 while (nextTime < Time.time) {
                     float r = Random.Range(0,500);
-                    if(r < 100)
+                    if(r < 8)
+                        Instantiate(prefabEarth, spawnPos, Quaternion.identity);
+                    else if(r < 100)
                         Instantiate(prefabPlaneta, spawnPos, Quaternion.identity);
                     else
                         Instantiate(prefabCuadrado, spawnPos, Quaternion.identity);
