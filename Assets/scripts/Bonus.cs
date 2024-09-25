@@ -4,11 +4,12 @@ using UnityEngine;
 
 public abstract class Bonus : Deslizador
 {
-    public abstract void bonus();
+    public abstract void bonus(Triangle tri);
 
     private void OnTriggerEnter2D(Collider2D colision) {
-        if (colision.gameObject.GetComponent<Triangle>() != null){
-            bonus();
+        Triangle tri = colision.gameObject.GetComponent<Triangle>();
+        if (tri != null){
+            bonus(tri);
             Destroy(gameObject);
         }
     }

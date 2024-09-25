@@ -48,11 +48,10 @@ public class Triangle : MonoBehaviour
         
         if (danger != null && !isInvulnerable){
             StartCoroutine(InvulnerableCooldown());
-            salud -= danger.danger;
+            CambiarVida(-danger.danger);
             if (salud <= 0){
                 Engine.en.GameOver();
             }
-            ActualizarDisplayer();
         }
     }
 
@@ -64,6 +63,11 @@ public class Triangle : MonoBehaviour
 
         isInvulnerable = false;
         spriteRenderer.color = originalColor;
+    }
+
+    public void CambiarVida(float f){
+        salud += f;
+        ActualizarDisplayer();
     }
 
     private void ActualizarDisplayer() => vidaDisplayer.text = salud.ToString(); 
