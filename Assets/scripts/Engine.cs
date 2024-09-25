@@ -24,6 +24,7 @@ public class Engine : MonoBehaviour
     public GameObject menuUI;
     public GameObject gameOverUI;
     public GameObject prefabCuadrado;
+    public GameObject prefabPlaneta;
     public GameObject prefabSeta;
     public float yIni;
     public float xIniMin;
@@ -47,6 +48,10 @@ public class Engine : MonoBehaviour
         RestartGame();
     }
 
+    public void Planet(){
+                        Instantiate(prefabPlaneta, spawnPos, Quaternion.identity);
+    }
+
     void Update() {
         switch (currentState) {
             case GameState.Menu:
@@ -54,7 +59,11 @@ public class Engine : MonoBehaviour
 
             case GameState.InGame:
                 while (nextTime < Time.time) {
-                    GenerarCuadrado();
+                    float r = Random.Range(0,500);
+                    if(r < 100)
+                        Instantiate(prefabPlaneta, spawnPos, Quaternion.identity);
+                    else
+                        Instantiate(prefabCuadrado, spawnPos, Quaternion.identity);
                     nextTime += cadencia;
                 }
 
@@ -93,10 +102,6 @@ public class Engine : MonoBehaviour
         currentState = GameState.Menu;
         menuUI.SetActive(true);
         gameOverUI.SetActive(false);
-    }
-
-    void GenerarCuadrado() {
-        Instantiate(prefabCuadrado, spawnPos, Quaternion.identity);
     }
 
     public void Score(float s) {

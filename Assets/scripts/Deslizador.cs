@@ -8,7 +8,7 @@ public class Deslizador : MonoBehaviour
     public float limiteInferior;
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         transform.Translate(Vector3.down * velocidad * Time.deltaTime);
 

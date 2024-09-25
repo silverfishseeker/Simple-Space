@@ -48,7 +48,7 @@ public class Triangle : MonoBehaviour
         
         if (danger != null && !isInvulnerable){
             StartCoroutine(InvulnerableCooldown());
-            salud -= danger.danger();
+            salud -= danger.danger;
             if (salud <= 0){
                 Engine.en.GameOver();
             }

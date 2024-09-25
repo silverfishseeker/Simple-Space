@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IDangerous
 {
-    public abstract float danger();
+    public abstract float danger{get;}
 }
