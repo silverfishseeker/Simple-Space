@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Earth : HasHealth, IDangerous
 {
-    public float scoree;
+    public int scoree;
     public float dealDamage;
 
     public float velocidadRotacion; 
 
-    public override float score => scoree;
+    public override int score => scoree;
     public float danger => dealDamage;
     
     new void Update() {

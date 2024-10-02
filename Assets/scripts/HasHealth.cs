@@ -11,7 +11,7 @@ public abstract class HasHealth : Deslizador, IDamageable
     protected SpriteRenderer spriteRenderer;
     private float saludActual;
 
-    public abstract float score{get;}
+    public abstract int score{get;}
 
     protected void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();

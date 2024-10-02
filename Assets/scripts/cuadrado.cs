@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Cuadrado : HasHealth, IDangerous
 {
-    public float scoree;
+    public int scoree;
     public float dealDamage;
 
-    public override float score => scoree;
+    public override int score => scoree;
     public float danger => dealDamage;
 
 }

@@ -2,14 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Engine : MonoBehaviour
 {
     public static Engine en;
 
-    public float poder;
+    public float poderVal;
+    public float poder{
+        get => poderVal;
+        set{
+            poderVal = value;
+            ActualizarPoderDisplayer();
+        }
+    }
+
     public float dificultad;
-    public float puntuacion;
+    public int puntuacion;
 
     public float cadencia => 100 / (dificultad + 20);
     public float cadenciaDificultad;
@@ -28,6 +37,8 @@ public class Engine : MonoBehaviour
     public GameObject prefabEarth;
     public GameObject prefabSeta;
     public GameObject vidaExtra;
+    public TextMeshProUGUI scoreDisplayer;
+    public TextMeshProUGUI poderDisplayer;
     public float yIni;
     public float xIniMin;
     public float xIniMax;
@@ -37,6 +48,8 @@ public class Engine : MonoBehaviour
 
     private Vector3 spawnPos => new Vector3(Random.Range(xIniMin, xIniMax), yIni, 0);
 
+    private void ActualizarPoderDisplayer() => poderDisplayer.text=poder.ToString();
+
     void OnEnable() {
         // singleton
         if (en != null) {
@@ -44,6 +57,7 @@ public class Engine : MonoBehaviour
             return;
         }
         en = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start() {
@@ -86,11 +100,10 @@ public class Engine : MonoBehaviour
     }
 
     public void StartGame() {
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        ActualizarPoderDisplayer();
         nextDificultyTime = cadenciaDificultad;
         nextTime = 0;
-        poder = 0;
-        dificultad = 0;
-        puntuacion = 0;
         currentState = GameState.InGame;
         menuUI.SetActive(false);
         gameOverUI.SetActive(false);
@@ -110,11 +123,14 @@ public class Engine : MonoBehaviour
         gameOverUI.SetActive(false);
     }
 
-    public void Score(float s) {
+    public void Score(int s) {
         if(isOn){
-            puntuacion += s;
-            if (puntuacion % puntosSeta == 0)
-                Instantiate(prefabSeta, spawnPos, Quaternion.identity);
+            for (int i = 0; i < s; i++) {
+                puntuacion ++;
+                if (puntuacion % puntosSeta == 0)
+                    Instantiate(prefabSeta, spawnPos, Quaternion.identity);
+            }
+            scoreDisplayer.text = puntuacion.ToString();
         }
     }
 }
