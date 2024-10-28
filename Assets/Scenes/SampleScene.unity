@@ -292,6 +292,7 @@ MonoBehaviour:
   cadenciaDificultad: 3
   currentState: 0
   puntosSeta: 50
+  puntosMejora: 140
   alturaMaxima: 5.1
   menuUI: {fileID: 1705189687}
   gameOverUI: {fileID: 1345571560}
@@ -301,6 +302,8 @@ MonoBehaviour:
   prefabSeta: {fileID: 2503459065054177566, guid: 23fa11443abae7c4b93e381141a0ecdc, type: 3}
   prefabVidaExtra: {fileID: 6845040176559380798, guid: 5c1f002ed68cbed4d840a0afa09b0a12, type: 3}
   prefabFlower: {fileID: 4858495854777774663, guid: d4e03ebff9f302e45b1c9afd10006362, type: 3}
+  prefabFlorSpread: {fileID: 1580742622069828263, guid: 4ce888277eb587849a573ffedc7334e3, type: 3}
+  prefabFlorNegra: {fileID: 3711454499594676451, guid: b28ea985853ff7049adfca0a95ae576b, type: 3}
   scoreDisplayer: {fileID: 916025284}
   poderDisplayer: {fileID: 492344524}
   yIni: 5
@@ -1671,13 +1674,15 @@ MonoBehaviour:
   rightLimit: 9
   cadenciaShortCoef: 0.3
   cadenciaLongCoef: 8
-  cadenciaRepetition: 0.2
+  cadenciaRepetition: 0.05
   explosionCooldown: 5
   salud: 10
   invulnerableTime: 1
   invulnerableColor: {r: 0.6415094, g: 0.51240057, b: 0.51240057, a: 1}
   balaDamageCoef: 1
   numOfNormalBala: 1
+  numOfSpreadBala: 1
+  BigBulletSizeCoef: 1
 --- !u!212 &1350174754
 SpriteRenderer:
   m_ObjectHideFlags: 0

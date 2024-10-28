@@ -29,6 +29,7 @@ public class Engine : MonoBehaviour
     public bool isOn => currentState == GameState.InGame;
 
     public int puntosSeta;
+    public int puntosMejora;
 
     public float alturaMaxima;
 
@@ -40,6 +41,8 @@ public class Engine : MonoBehaviour
     public GameObject prefabSeta;
     public GameObject prefabVidaExtra;
     public GameObject prefabFlower;
+    public GameObject prefabFlorSpread;
+    public GameObject prefabFlorNegra;
     public TextMeshProUGUI scoreDisplayer;
     public TextMeshProUGUI poderDisplayer;
     public float yIni;
@@ -68,7 +71,14 @@ public class Engine : MonoBehaviour
     }
 
     public void Prueba(){
-        Instantiate(prefabFlower, spawnPos, Quaternion.identity);
+        Instantiate(
+            Random.Range(0,3) switch {
+                0 => prefabFlower,
+                1 => prefabFlorSpread,
+                2 => prefabFlorNegra,
+                _ => null
+            },
+            spawnPos, Quaternion.identity);
     }
 
     void Update() {
@@ -132,6 +142,15 @@ public class Engine : MonoBehaviour
                 puntuacion ++;
                 if (puntuacion % puntosSeta == 0)
                     Instantiate(prefabSeta, spawnPos, Quaternion.identity);
+                if (puntuacion % puntosMejora == 0)
+                    Instantiate(
+                        Random.Range(0,3) switch {
+                            0 => prefabFlower,
+                            1 => prefabFlorSpread,
+                            2 => prefabFlorNegra,
+                            _ => null
+                        },
+                        spawnPos, Quaternion.identity);
             }
             scoreDisplayer.text = puntuacion.ToString();
         }

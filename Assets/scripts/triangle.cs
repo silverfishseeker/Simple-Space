@@ -48,6 +48,8 @@ public class Triangle : MonoBehaviour
     public Color invulnerableColor;
     public float balaDamageCoef = 1;
     public int numOfNormalBala = 1;
+    public int numOfSpreadBala = 1;
+    public float BigBulletSizeCoef = 1;
     
     private float nextShootTime;
     private float nextRepetitionShootTime;
@@ -70,6 +72,8 @@ public class Triangle : MonoBehaviour
     private void Shoot(){
         GameObject nuevoPrefab = Instantiate(bala, transform.position, Quaternion.identity);
         nuevoPrefab.GetComponent<Bullet>().damage*=balaDamageCoef;
+        if (currMode == 2)
+            nuevoPrefab.transform.localScale = new Vector3(BigBulletSizeCoef, BigBulletSizeCoef, BigBulletSizeCoef);
     }
 
     void Update()
@@ -82,12 +86,12 @@ public class Triangle : MonoBehaviour
         while (Engine.en.isOn && nextShootTime < Time.time){
             nextShootTime += cadencia;
             Shoot();
-            numRepetitionBulletsLeft = numOfNormalBala - 1;
+            numRepetitionBulletsLeft = (currMode == 0 ? numOfNormalBala : numOfSpreadBala) - 1;
             nextRepetitionShootTime = Time.time + cadenciaRepetition;
         }
 
         // Repetición de balas normales
-        if (currMode == 0) {
+        if (currMode == 0 || currMode == 1) {
             while (numRepetitionBulletsLeft > 0 && nextRepetitionShootTime < Time.time) {
                 nextRepetitionShootTime += cadenciaRepetition;
                 numRepetitionBulletsLeft -= 1;
@@ -113,6 +117,7 @@ public class Triangle : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E)) {
             currMode = (currMode+1)%3;
             nextShootTime = Time.time + cadencia;
+            numRepetitionBulletsLeft = 0;
         }
     }
 
