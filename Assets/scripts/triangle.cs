@@ -40,13 +40,18 @@ public class Triangle : MonoBehaviour
             return coef * 3 / (Engine.en.poder+1);
         }
     }
+    public float cadenciaRepetition;
 
     public float explosionCooldown;
     public float salud;
     public float invulnerableTime;
     public Color invulnerableColor;
+    public float balaDamageCoef = 1;
+    public int numOfNormalBala = 1;
     
     private float nextShootTime;
+    private float nextRepetitionShootTime;
+    private float numRepetitionBulletsLeft = 0;
     private float nextExplosionTime = 0f;
 
     private SpriteRenderer spriteRenderer;
@@ -61,6 +66,11 @@ public class Triangle : MonoBehaviour
         cooldownBar.fillAmount = 1;
         currMode = 0;
     }
+    
+    private void Shoot(){
+        GameObject nuevoPrefab = Instantiate(bala, transform.position, Quaternion.identity);
+        nuevoPrefab.GetComponent<Bullet>().damage*=balaDamageCoef;
+    }
 
     void Update()
     {
@@ -68,24 +78,38 @@ public class Triangle : MonoBehaviour
         float posicionXLimitada  = Mathf.Clamp(posicionRaton.x, leftLimit, rightLimit);
         transform.position = new Vector3(posicionXLimitada , transform.position.y, transform.position.z);
 
+        // Diparo único
         while (Engine.en.isOn && nextShootTime < Time.time){
             nextShootTime += cadencia;
-            GameObject nuevoPrefab = Instantiate(bala, transform.position, Quaternion.identity);
-            nextShootTime = Time.time + cadencia;
+            Shoot();
+            numRepetitionBulletsLeft = numOfNormalBala - 1;
+            nextRepetitionShootTime = Time.time + cadenciaRepetition;
         }
 
+        // Repetición de balas normales
+        if (currMode == 0) {
+            while (numRepetitionBulletsLeft > 0 && nextRepetitionShootTime < Time.time) {
+                nextRepetitionShootTime += cadenciaRepetition;
+                numRepetitionBulletsLeft -= 1;
+                Shoot();
+            }
+        }
+
+        // Ataque de explosión
         if (Engine.en.isOn && Input.GetKeyDown(KeyCode.R) && Time.time >= nextExplosionTime) {
             Engine.en.poder --;
             nextExplosionTime = Time.time + explosionCooldown;
 
             GameObject nuevaExplosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         }
-
+        
+        // Interfaz del cooldown de explosión
         if (Time.time < nextExplosionTime)
             cooldownBar.fillAmount = 1 - (nextExplosionTime - Time.time) / explosionCooldown;
         else
             cooldownBar.fillAmount = 1; 
 
+        // Cambio de tipo de bala
         if(Input.GetKeyDown(KeyCode.E)) {
             currMode = (currMode+1)%3;
             nextShootTime = Time.time + cadencia;

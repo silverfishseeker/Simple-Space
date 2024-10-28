@@ -38,7 +38,8 @@ public class Engine : MonoBehaviour
     public GameObject prefabPlaneta;
     public GameObject prefabEarth;
     public GameObject prefabSeta;
-    public GameObject vidaExtra;
+    public GameObject prefabVidaExtra;
+    public GameObject prefabFlower;
     public TextMeshProUGUI scoreDisplayer;
     public TextMeshProUGUI poderDisplayer;
     public float yIni;
@@ -67,7 +68,7 @@ public class Engine : MonoBehaviour
     }
 
     public void Prueba(){
-        Instantiate(vidaExtra, spawnPos, Quaternion.identity);
+        Instantiate(prefabFlower, spawnPos, Quaternion.identity);
     }
 
     void Update() {
@@ -76,7 +77,7 @@ public class Engine : MonoBehaviour
                 while (nextTime < Time.time) {
                     float r = Random.Range(0,500);
                     if(r < 1)
-                        Instantiate(vidaExtra, spawnPos, Quaternion.identity);
+                        Instantiate(prefabVidaExtra, spawnPos, Quaternion.identity);
                     else if(r < 8)
                         Instantiate(prefabEarth, spawnPos, Quaternion.identity);
                     else if(r < 100)
