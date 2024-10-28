@@ -6,14 +6,41 @@ using UnityEngine.UI;
 
 public class Triangle : MonoBehaviour
 {
-    public GameObject bala;
+    /**
+     * 0 -> Normal
+     * 1 -> Spread
+     * 2 -> Big
+     */
+    public int currMode;
+
+    public GameObject bala => currMode switch {
+        1 => smallBala,
+        2 => bigBala,
+        _ => normalBala
+    };
+    public GameObject normalBala;
+    public GameObject smallBala;
+    public GameObject bigBala;
     public GameObject explosionPrefab;
     public TextMeshProUGUI vidaDisplayer;
     public Image cooldownBar;
 
     public float leftLimit;
     public float rightLimit;
-    public float cadencia => 3 / (Engine.en.poder+1);
+
+    public float cadenciaShortCoef;
+    public float cadenciaLongCoef;
+    public float cadencia {
+        get {
+            float coef = currMode switch {
+                1 => cadenciaShortCoef,
+                2 => cadenciaLongCoef,
+                _ => 1
+            };
+            return coef * 3 / (Engine.en.poder+1);
+        }
+    }
+
     public float explosionCooldown;
     public float salud;
     public float invulnerableTime;
@@ -32,6 +59,7 @@ public class Triangle : MonoBehaviour
         originalColor = spriteRenderer.color;
         ActualizarDisplayer();
         cooldownBar.fillAmount = 1;
+        currMode = 0;
     }
 
     void Update()
@@ -57,6 +85,11 @@ public class Triangle : MonoBehaviour
             cooldownBar.fillAmount = 1 - (nextExplosionTime - Time.time) / explosionCooldown;
         else
             cooldownBar.fillAmount = 1; 
+
+        if(Input.GetKeyDown(KeyCode.E)) {
+            currMode = (currMode+1)%3;
+            nextShootTime = Time.time + cadencia;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D colision) {

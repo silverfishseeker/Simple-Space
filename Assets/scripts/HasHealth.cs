@@ -20,7 +20,7 @@ public abstract class HasHealth : Deslizador, IDamageable
         ActualizarColor();
     }
 
-    public void damage(float dam){
+    public void Damage(float dam){
         saludActual -= dam;
         if (saludActual <= 0) {
             Engine.en.Score(score);

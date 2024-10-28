@@ -292,6 +292,7 @@ MonoBehaviour:
   cadenciaDificultad: 3
   currentState: 0
   puntosSeta: 50
+  alturaMaxima: 5.1
   menuUI: {fileID: 1705189687}
   gameOverUI: {fileID: 1345571560}
   prefabCuadrado: {fileID: 5448196681451529098, guid: 7150a6f2a0ca2f744bddaf68bd040d9e, type: 3}
@@ -1658,12 +1659,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a813df31d4f89a41a4a3e28af8472c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bala: {fileID: 79485751223411869, guid: c671a2bf15015d340aeb582f122b025f, type: 3}
+  currMode: 0
+  normalBala: {fileID: 79485751223411869, guid: c671a2bf15015d340aeb582f122b025f, type: 3}
+  smallBala: {fileID: 79485751223411869, guid: 2d0bba63fcac5584ba67a6bc336eae85, type: 3}
+  bigBala: {fileID: 79485751223411869, guid: 79bc52e45af171c47b35167619edf549, type: 3}
   explosionPrefab: {fileID: 9210219660689776285, guid: 81a8bfd0fb50101448a5eb09a5b1dee3, type: 3}
   vidaDisplayer: {fileID: 920485580}
   cooldownBar: {fileID: 1085007192}
   leftLimit: -9
   rightLimit: 9
+  cadenciaShortCoef: 0.3
+  cadenciaLongCoef: 8
   explosionCooldown: 5
   salud: 10
   invulnerableTime: 1

@@ -36,7 +36,7 @@ public class Explosion : MonoBehaviour
         IDamageable damageable = colision.gameObject.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.damage(daño);
+            damageable.Damage(daño);
         }
     }
 }

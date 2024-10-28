@@ -30,6 +30,8 @@ public class Engine : MonoBehaviour
 
     public int puntosSeta;
 
+    public float alturaMaxima;
+
     public GameObject menuUI;
     public GameObject gameOverUI;
     public GameObject prefabCuadrado;
@@ -70,9 +72,6 @@ public class Engine : MonoBehaviour
 
     void Update() {
         switch (currentState) {
-            case GameState.Menu:
-                break;
-
             case GameState.InGame:
                 while (nextTime < Time.time) {
                     float r = Random.Range(0,500);
@@ -94,6 +93,9 @@ public class Engine : MonoBehaviour
 
                 break;
 
+            case GameState.Menu:
+                break;
+
             case GameState.GameOver:
                 break;
         }
@@ -103,7 +105,7 @@ public class Engine : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         ActualizarPoderDisplayer();
         nextDificultyTime = cadenciaDificultad;
-        nextTime = 0;
+        nextTime = Time.time-1;
         currentState = GameState.InGame;
         menuUI.SetActive(false);
         gameOverUI.SetActive(false);
