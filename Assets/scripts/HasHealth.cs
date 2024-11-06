@@ -13,7 +13,8 @@ public abstract class HasHealth : Deslizador, IDamageable
 
     public abstract int score{get;}
 
-    protected void Start() {
+    protected new void Start() {
+        base.Start();
         spriteRenderer = GetComponent<SpriteRenderer>();
         startColor = spriteRenderer.color;
         saludActual = salud;

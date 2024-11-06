@@ -7,11 +7,11 @@ public class Deslizador : MonoBehaviour
     public float velocidad;
     public float limiteInferior = -5;
 
-    // Update is called once per frame
-    protected void Update()
-    {
-        transform.Translate(Vector3.down * velocidad * Time.deltaTime);
+    protected void Start(){
+        GetComponent<Rigidbody2D>().velocity = Vector2.down * velocidad;
+    }
 
+    protected void Update() {
         if (transform.position.y < limiteInferior)
             Destroy(gameObject);
     }

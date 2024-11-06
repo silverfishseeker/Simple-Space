@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 271, y: 185}
+  m_AnchoredPosition: {x: 343.97, y: 225.47}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.36540988, y: 0.15998432}
 --- !u!114 &2021629
@@ -299,6 +299,7 @@ MonoBehaviour:
   prefabCuadrado: {fileID: 5448196681451529098, guid: 7150a6f2a0ca2f744bddaf68bd040d9e, type: 3}
   prefabPlaneta: {fileID: 7399343732047687458, guid: 2df3bd21edb0f614196d862bbf64b4a8, type: 3}
   prefabEarth: {fileID: 6845040176559380798, guid: 5c1f002ed68cbed4d840a0afa09b0a12, type: 3}
+  prefabCookie: {fileID: 8954304625026876325, guid: 54119b8d379578b4ca668033feb3e838, type: 3}
   prefabSeta: {fileID: 2503459065054177566, guid: 23fa11443abae7c4b93e381141a0ecdc, type: 3}
   prefabVidaExtra: {fileID: 6845040176559380798, guid: 5c1f002ed68cbed4d840a0afa09b0a12, type: 3}
   prefabFlower: {fileID: 4858495854777774663, guid: d4e03ebff9f302e45b1c9afd10006362, type: 3}
@@ -494,7 +495,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -221.5, y: -184}
+  m_AnchoredPosition: {x: -294, y: -225}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &492344524
@@ -691,7 +692,7 @@ GameObject:
   - component: {fileID: 529635642}
   m_Layer: 0
   m_Name: Wall4
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1200,7 +1201,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -321.5, y: -184}
+  m_AnchoredPosition: {x: -394, y: -225}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920485580
@@ -1223,7 +1224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1313,7 +1314,7 @@ GameObject:
   - component: {fileID: 1008093344}
   m_Layer: 0
   m_Name: Wall2
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1500,7 +1501,7 @@ GameObject:
   - component: {fileID: 1256901581}
   m_Layer: 0
   m_Name: Wall1
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1800,7 +1801,7 @@ GameObject:
   - component: {fileID: 1624319954}
   m_Layer: 0
   m_Name: Wall3
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2136,7 +2137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -161.48895, y: -184}
+  m_AnchoredPosition: {x: -233.98895, y: -225}
   m_SizeDelta: {x: 20.0221, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1798228235

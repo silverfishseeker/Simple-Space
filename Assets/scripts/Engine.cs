@@ -38,6 +38,7 @@ public class Engine : MonoBehaviour
     public GameObject prefabCuadrado;
     public GameObject prefabPlaneta;
     public GameObject prefabEarth;
+    public GameObject prefabCookie;
     public GameObject prefabSeta;
     public GameObject prefabVidaExtra;
     public GameObject prefabFlower;
@@ -71,14 +72,7 @@ public class Engine : MonoBehaviour
     }
 
     public void Prueba(){
-        Instantiate(
-            Random.Range(0,3) switch {
-                0 => prefabFlower,
-                1 => prefabFlorSpread,
-                2 => prefabFlorNegra,
-                _ => null
-            },
-            spawnPos, Quaternion.identity);
+                        Instantiate(prefabCookie, spawnPos, Quaternion.identity);
     }
 
     void Update() {
@@ -88,6 +82,8 @@ public class Engine : MonoBehaviour
                     float r = Random.Range(0,500);
                     if(r < 1)
                         Instantiate(prefabVidaExtra, spawnPos, Quaternion.identity);
+                    else if(r < 8)
+                        Instantiate(prefabCookie, spawnPos, Quaternion.identity);
                     else if(r < 8)
                         Instantiate(prefabEarth, spawnPos, Quaternion.identity);
                     else if(r < 100)
