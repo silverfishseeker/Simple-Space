@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour{
     }
 
     void Update() {
-        if (transform.position.y > Engine.en.alturaMaxima)
+        if (transform.position.y > Engine.en.frame.up)
             Destroy(gameObject);
         currentFrameCollided.Clear();
     }

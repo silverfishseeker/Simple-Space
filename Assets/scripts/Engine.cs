@@ -8,6 +8,20 @@ public class Engine : MonoBehaviour
 {
     public static Engine en;
 
+    [System.Serializable]
+    public struct Frame{
+        public float up;
+        public float down;
+        public float left;
+        public float right;
+        public float margenPequeño;
+        public float margenGrande;
+
+        public bool IsIn(float x, float y) => x > left && x < right && y > down && y < up;
+    }
+
+    public Frame frame;
+
     public float poderVal;
     public float poder{
         get => poderVal;
@@ -31,8 +45,6 @@ public class Engine : MonoBehaviour
     public int puntosSeta;
     public int puntosMejora;
 
-    public float alturaMaxima;
-
     public GameObject menuUI;
     public GameObject gameOverUI;
     public GameObject prefabCuadrado;
@@ -46,14 +58,11 @@ public class Engine : MonoBehaviour
     public GameObject prefabFlorNegra;
     public TextMeshProUGUI scoreDisplayer;
     public TextMeshProUGUI poderDisplayer;
-    public float yIni;
-    public float xIniMin;
-    public float xIniMax;
 
     private float nextTime;
     private float nextDificultyTime;
 
-    private Vector3 spawnPos => new Vector3(Random.Range(xIniMin, xIniMax), yIni, 0);
+    private Vector3 spawnPos => new Vector3(Random.Range(frame.left+frame.margenGrande, frame.right-frame.margenGrande), frame.up, 0);
 
     private void ActualizarPoderDisplayer() => poderDisplayer.text=poder.ToString();
 
@@ -82,7 +91,7 @@ public class Engine : MonoBehaviour
                     float r = Random.Range(0,500);
                     if(r < 1)
                         Instantiate(prefabVidaExtra, spawnPos, Quaternion.identity);
-                    else if(r < 8)
+                    else if(r < 4)
                         Instantiate(prefabCookie, spawnPos, Quaternion.identity);
                     else if(r < 8)
                         Instantiate(prefabEarth, spawnPos, Quaternion.identity);

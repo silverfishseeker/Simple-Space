@@ -14,9 +14,7 @@ public class SpreadBullet: Bullet{
     }
 
     void Update() {
-        if (transform.position.y > Engine.en.alturaMaxima ||
-            transform.position.x < Engine.en.xIniMin ||
-            transform.position.x > Engine.en.xIniMax )
+        if (!Engine.en.frame.IsIn(transform.position.x, transform.position.y))
             Destroy(gameObject);
     }
 }
